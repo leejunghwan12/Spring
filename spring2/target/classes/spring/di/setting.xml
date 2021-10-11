@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+  <!-- Exam exam = new NewlecExam(); -->
+  <bean id="exam" class="spring.di.entity.NewlecExam" >
+  	
+  	<property name="kor" value="30"></property>
+  	<property name="eng" value="40"></property>
+  	<property name="math" value="50"></property>
+  
+  </bean>
+
+	<!-- 변수명, 어떤 객체명인지 Exam exam = new NewlecExam();  안겹치게 패키지명까지-->
+	<!-- 혹은 중첨된 태그를 이용할 수도 있다 
+	
+		<property> 
+			<value> 10 </value>
+			<value> 20 </value>
+			<value> 30 </value>			
+		</property>
+	
+	 -->
+    <!-- ExamConsole console = new InlineExamConsole(exam); // DI -->
+    <!-- console.setExam(exam) 
+		setExam 을 프로퍼티명으로 쓰면 set 지워지고 e소문자 된다.
+		type value  객체가 벨류형인지 기본형  
+		type ref 객체가 참조형인지 객체가 참조형이니까 ref에 쓴다-->	
+		
+    <!-- ExamConsole console = new GridExamConsole(); -->
+	<bean id="console" class="spring.di.ui.InlineExamConsole" >
+		<!-- console.setExam(exam); -->
+		<property name="exam" ref="exam" />
+	</bean>
+	
+	 <!-- 어떻게 값을 넣을까? 숫자는 value로 넣는다. -->
+	 
+	
+		
+	
+
+
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean id="exam" class="spring.di.entity.NewlecExam" />
+<!-- 변수명, 어떤 객체명인지 Exam exam = new NewlecExam();  안겹치게 패키지명까지-->
+	
+    <!-- ExamConsole console = new InlineExamConsole(exam); // DI -->
+    <!-- console.setExam(exam) 
+		setExam 을 프로퍼티명으로 쓰면 set 지워지고 e소문자 된다.
+		type value  객체가 벨류형인지 기본형  
+		type ref 객체가 참조형인지 객체가 참조형이니까 ref에 쓴다-->	
+		
+     <bean id="console" class="spring.di.ui.GridExamConsole">
+		<property name="exam" ref="exam"/>	
+	 </bean>
+	 
+	
+		
+	
+
+
+</beans>

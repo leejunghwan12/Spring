@@ -1,0 +1,44 @@
+스프링 공부 
+오늘배운것 
+
+Setting.xml
+xml은 지시서를 말한다. 
+일반 프로젝트에서 xml 파일을 추가해서
+DI를 할 수 있다. DI는 조립이다.  
+<bean id="exam" class="spring.di.entity.NewlecExam" />
+변수명, 어떤 객체명인지 Exam exam = new NewlecExam();  안겹치게 패키지명까지 써줘야 한다.
+
+<!-- ExamConsole console = new InlineExamConsole(exam); // DI -->
+ <!-- console.setExam(exam) 
+		setExam 을 프로퍼티명으로 쓰면 set 지워지고 e소문자 된다.
+		type value  객체가 벨류형인지 기본형  
+		type ref 객체가 참조형인지 객체가 참조형이니까 ref에 쓴다-->	
+		
+ <bean id="console" class="spring.di.ui.GridExamConsole">
+		<property name="exam" ref="exam"/>	
+</bean>
+	 
+
+클래스 패스는 src가 루트가 된다. 
+패키지는 하나의 디렉토리이다. 
+
+Exam exam//참조형식// = new NewlecExam//객체형식//();
+이 앞뒤는 보통은 같아야하는데 부모자식 관계면 괜찮음 (인터페이스)
+//ExamConsole console = new InlineExamConsole(exam); // DI
+
+
+//ExamConsole console = new GridExamConsole(exam); //바꿔 끼우는 작업 모듈의 결합은 스프링이면
+//자동으로 할 수 있도록 등록할 수 있다.
+
+// console.setExam(exam);
+		 
+// ExamConsole console = ? 어떻게 설정으로 뺄래 ?
+//스프링에게 지시서로 넘겨야 한다. 
+
+//지시서 세팅 xml 지시서
+// 이녀석의 지시대로 읽어서 지시대로 객체를 만들고 그 만들어진 객체를 활용하는 방법
+// 그 주체를 생성할 때 사용될 수 있는놈은 applicationContext 생성 및 조립 구체적인 객체 이름이다. 
+// 인터페이스 명이고 이녀석을 구현중인게
+// ApplicationContext context = new ClassPathXmlApllicationcontext("config.xml");이다. 
+		
+오늘은 여기까지 했고, 이제 깃허브로 올려보고 쉬자. 
