@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-  <!-- Exam exam = new NewlecExam(); -->
-  <bean id="exam" class="spring.di.entity.NewlecExam" >
+  <!-- Exam exam = new NewlecExam(); 세터로 만들기 -->
+<!--   <bean id="exam" class="spring.di.entity.NewlecExam" >
   	
   	<property name="kor" value="30"></property>
   	<property name="eng" value="40"></property>
   	<property name="math" value="50"></property>
   
   </bean>
+ -->
+  <!-- Exam exam = new NewlecExam(); 생성자로 만들기 -->
+
+<!--   <bean id="exam" class="spring.di.entity.NewlecExam" >
+	<constructor-arg index="0" value="0"/>  	
+	<constructor-arg index="1" value="10"/>  	
+	<constructor-arg index="3" value="20"/>  	
+	<constructor-arg index="2" value="30"/>  	
+  </bean> -->
+
+<!-- 단일태그 설정 네임스페이스 p 추가 어떤 역할 ? 특별한 일이 아니면 이게 더 편함! -->
+
+
+	 <bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10" />
+
+
+
+<!-- 인덱스 말고 name 을 쓸 수도 있다. 생성자 타입이 플롯 이면 플롯으로 지정가능  -->
+
+
 
 	<!-- 변수명, 어떤 객체명인지 Exam exam = new NewlecExam();  안겹치게 패키지명까지-->
 	<!-- 혹은 중첨된 태그를 이용할 수도 있다 

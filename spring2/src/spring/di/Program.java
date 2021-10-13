@@ -1,13 +1,14 @@
 package spring.di;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import spring.di.entity.Exam;
 import spring.di.entity.NewlecExam;
 import spring.di.ui.ExamConsole;
-import spring.di.ui.GridExamConsole;
-import spring.di.ui.InlineExamConsole;
 
 public class Program {
 
@@ -16,48 +17,57 @@ public class Program {
 		ApplicationContext context = 
 				new ClassPathXmlApplicationContext("spring/di/setting.xml");
 		
-		//1踰� 鍮� 媛��졇�삤湲� (�씠由꾩쑝濡�) gg
+		//1번 빈 가져오기 (이름으로) 
 		//ExamConsole console = (ExamConsole) context.getBean("console");
-		//�씠由꾩쑝濡� 爰쇰궡湲� 罹먯뒪�똿�빐�빞�맖 -�뼱�뼡 媛앹껜�씤吏� 紐곕씪�꽌 �뜕�졇�빞�맖 
+		//이름으로 꺼내기 캐스팅해야됨 -어떤 객체인지 몰라서 던져야됨 
 		
-		//2踰� 鍮� 媛��졇�삤湲� (媛숈� �삎�떇�쑝濡� - �씤�꽣硫�-�씤�꽣) �옄猷뚰삎紐낆쑝濡� �걚�궡湲� 
+		//2번 빈 가져오기 (같은 형식으로 - 인터면-인터) 자료형명으로 끄내기 
 		ExamConsole console = context.getBean(ExamConsole.class);
-		//�씠 �삎�떇怨� 留욌뒗�븷瑜� 媛��졇���씪 
-		//吏��떆�꽌瑜� �씫�뼱�꽌 媛앹껜�솕 �빐�꽌 �떞�� 洹몃쫯 = ioc而⑦뀒�씠�꼫 �씠由꾩씠 context 媛� �맂�떎.
+		//이 형식과 맞는애를 가져와라 
+		//지시서를 읽어서 객체화 해서 담은 그릇 = ioc컨테이너 이름이 context 가 된다.
 		
 		
 		
 		
-		// �겢�옒�뒪 �뙣�뒪�뒗 src媛� 猷⑦듃 媛� �맂�떎. �뙣�궎吏�媛� �븯�굹�쓽 �뵒�젆�넗由щ떎. 
+		// 클래스 패스는 src가 루트 가 된다. 패키지가 하나의 디렉토리다. 
 
 		//Exam exam = new NewlecExam();
-		
-		 //�븵�씠 李몄“ �삎�떇 �뮘媛� 媛앹껜�삎�떇 蹂댄넻�� 媛숈븘�빞�븯�뒗�뜲 遺�紐⑥옄�떇 愿�怨꾨㈃ 愿쒖갖�쓬 Exam exam = new NewlecExam();
+		//Exam exam = new NewlecExam(10,10,10,10); 어떻게 설정할래 ?
+
+		 //앞이 참조 형식 뒤가 객체형식 보통은 같아야하는데 부모자식 관계면 괜찮음 Exam exam = new NewlecExam();
 		 //ExamConsole console = new InlineExamConsole(exam); // DI
 		  
-		//ExamConsole console = new GridExamConsole(exam); //諛붽퓭 �겮�슦�뒗 �옉�뾽 紐⑤뱢�쓽 寃고빀�� �뒪�봽留곸씠硫�
-		 //�옄�룞�쑝濡쒗빐以��떎.
+		//ExamConsole console = new GridExamConsole(exam); //바꿔 끼우는 작업 모듈의 결합은 스프링이면
+		 //자동으로해준다.
 		  
 		// console.setExam(exam);
 		 
-		// ExamConsole console = ? �뼱�뼸寃� �꽕�젙�쑝濡� 類꾨옒 ?
-		//�뒪�봽留곸뿉寃� 吏��떆�꽌濡� �꽆寃⑥빞 �븳�떎. 
+		// ExamConsole console = ? 어떻게 설정으로 뺄래 ?
+		//스프링에게 지시서로 넘겨야 한다. 
+		Exam exam = context.getBean(Exam.class);
+		System.out.println(exam.toString());
+		
+		//to string 컬럼 다 선택하고 이클립스가 이 값들을 출력해주는 문자열을 포함시키게 된다.
+		
 		
 		console.print();
 		
 		//===============================================//
 		
-		//吏��떆�꽌 �꽭�똿 xml 吏��떆�꽌
-		// �씠���꽍�쓽 吏��떆��濡� �씫�뼱�꽌 吏��떆��濡� 媛앹껜瑜� 留뚮뱾怨� 洹� 留뚮뱾�뼱吏� 媛앹껜瑜� �솢�슜�븯�뒗 諛⑸쾿
-		// 洹� 二쇱껜瑜� �깮�꽦�븷 �븣 �궗�슜�맆 �닔 �엳�뒗�냸�� applicationContext �깮�꽦 諛� 議곕┰ 援ъ껜�쟻�씤 媛앹껜 �씠由꾩씠�떎. 
-		// �씤�꽣�럹�씠�뒪 紐낆씠怨� �씠���꽍�쓣 援ы쁽以묒씤寃�
+		//지시서 세팅 xml 지시서
+		// 이녀석의 지시대로 읽어서 지시대로 객체를 만들고 그 만들어진 객체를 활용하는 방법
+		// 그 주체를 생성할 때 사용될 수 있는놈은 applicationContext 생성 및 조립 구체적인 객체 이름이다. 
+		// 인터페이스 명이고 이녀석을 구현중인게
 		// ApplicationContext context = new ClassPathXmlApllicationcontext("config.xml");
 		
-		//�뒪�봽留� �봽�젅�엫�썙�겕 �뒪�봽留� 而⑦뀓�뒪�듃 
+		//스프링 프레임워크 스프링 컨텍스트 
 		
 		
-		
-		
+		List<Exam> exams = new ArrayList<>();
+		exams.add(new NewlecExam(1,1,1,1));
+		for (Exam e : exams) {
+			System.out.println(e);
+		}
 		
 		
 	}
