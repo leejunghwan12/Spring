@@ -15,6 +15,7 @@ xml <bean id= "b" class = "data B2" />
 bean id 를 잘줘야한다. 2개이상일때 터짐 
 오토와이어드 뭘 기준으로 끄내주냐 ? id 값 Exam exam < 이놈 
 
-근데 겹치면? exam2 <<id값 퀄리파이어드 준다. 
+근데 겹치면? exam2 <<id값 퀄리파이어 준다. 
 
 autowired 참조할수 있는 객체를 자동으로 찾아서 바인딩해준다 newlecexam -> interface 이다. 
+
