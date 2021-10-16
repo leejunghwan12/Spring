@@ -2,65 +2,68 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- 어노테이션이 있는지 확인하라는 명령어 추가 -->
+	<context:annotation-config />
+	<bean id="exam1" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10" />
+	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10" />
+
+	<!-- Exam exam = new NewlecExam(); 세터로 만들기 -->
+	<!-- <bean id="exam" class="spring.di.entity.NewlecExam" > <property name="kor" 
+		value="30"></property> <property name="eng" value="40"></property> <property 
+		name="math" value="50"></property> </bean> -->
+	<!-- Exam exam = new NewlecExam(); 생성자로 만들기 -->
+
+	<!-- <bean id="exam" class="spring.di.entity.NewlecExam" > <constructor-arg 
+		index="0" value="0"/> <constructor-arg index="1" value="10"/> <constructor-arg 
+		index="3" value="20"/> <constructor-arg index="2" value="30"/> </bean> -->
+
+	<!-- 단일태그 설정 네임스페이스 p 추가 어떤 역할 ? 특별한 일이 아니면 이게 더 편함! -->
 
 
-  <!-- Exam exam = new NewlecExam(); 세터로 만들기 -->
-<!--   <bean id="exam" class="spring.di.entity.NewlecExam" >
-  	
-  	<property name="kor" value="30"></property>
-  	<property name="eng" value="40"></property>
-  	<property name="math" value="50"></property>
-  
-  </bean>
- -->
-  <!-- Exam exam = new NewlecExam(); 생성자로 만들기 -->
-
-<!--   <bean id="exam" class="spring.di.entity.NewlecExam" >
-	<constructor-arg index="0" value="0"/>  	
-	<constructor-arg index="1" value="10"/>  	
-	<constructor-arg index="3" value="20"/>  	
-	<constructor-arg index="2" value="30"/>  	
-  </bean> -->
-
-<!-- 단일태그 설정 네임스페이스 p 추가 어떤 역할 ? 특별한 일이 아니면 이게 더 편함! -->
+	<!-- <bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="30" 
+		/> -->
 
 
-	 <bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10" />
+	<!-- 인덱스 말고 name 을 쓸 수도 있다. 생성자 타입이 플롯 이면 플롯으로 지정가능 -->
 
 
 
-<!-- 인덱스 말고 name 을 쓸 수도 있다. 생성자 타입이 플롯 이면 플롯으로 지정가능  -->
+	<!-- 변수명, 어떤 객체명인지 Exam exam = new NewlecExam(); 안겹치게 패키지명까지 -->
+	<!-- 혹은 중첨된 태그를 이용할 수도 있다 <property> <value> 10 </value> <value> 20 </value> 
+		<value> 30 </value> </property> -->
+	<!-- ExamConsole console = new InlineExamConsole(exam); // DI -->
+	<!-- console.setExam(exam) setExam 을 프로퍼티명으로 쓰면 set 지워지고 e소문자 된다. type value 
+		객체가 벨류형인지 기본형 type ref 객체가 참조형인지 객체가 참조형이니까 ref에 쓴다 -->
+
+	<!-- ExamConsole console = new GridExamConsole(); -->
+	<!-- <bean id="console" class="spring.di.ui.InlineExamConsole" > console.setExam(exam); 
+		<property name="exam" ref="exam" /> </bean> -->
+	<!-- 어떻게 값을 넣을까? 숫자는 value로 넣는다. -->
 
 
+	<!-- 10-16일 추가 -->
+	<!-- <bean id="exams" class="java.util.ArrayList"/> -->
+	<!-- 컬렉션 추가 -->
+	<!-- <bean id="exams" class="java.util.ArrayList"> <constructor-arg> <list> 
+		<bean class="spring.di.entity.NewlecExam" p:kor="1" p:eng="1" /> <ref bean="exam"/> 
+		</list> </constructor-arg> </bean> -->
 
-	<!-- 변수명, 어떤 객체명인지 Exam exam = new NewlecExam();  안겹치게 패키지명까지-->
-	<!-- 혹은 중첨된 태그를 이용할 수도 있다 
-	
-		<property> 
-			<value> 10 </value>
-			<value> 20 </value>
-			<value> 30 </value>			
-		</property>
-	
-	 -->
-    <!-- ExamConsole console = new InlineExamConsole(exam); // DI -->
-    <!-- console.setExam(exam) 
-		setExam 을 프로퍼티명으로 쓰면 set 지워지고 e소문자 된다.
-		type value  객체가 벨류형인지 기본형  
-		type ref 객체가 참조형인지 객체가 참조형이니까 ref에 쓴다-->	
-		
-    <!-- ExamConsole console = new GridExamConsole(); -->
-	<bean id="console" class="spring.di.ui.InlineExamConsole" >
-		<!-- console.setExam(exam); -->
-		<property name="exam" ref="exam" />
+
+	<!-- 컬렉션의 개별화 -->
+	<!-- <util:list id="exams" list-class="java.util.ArrayList"> <bean class="spring.di.entity.NewlecExam" 
+		p:kor="1" p:eng="1" /> <ref bean="exam"/> </util:list> -->
+
+
+	<!--annotation을 이용한 객체생성방법 오토와이어드 하려면 찾아보라고 설계서에 써줘야 한다 -->
+	<bean id="console" class="spring.di.ui.InlineExamConsole">
+		<!-- <property name="exam" ref="exam" /> -->
 	</bean>
-	
-	 <!-- 어떻게 값을 넣을까? 숫자는 value로 넣는다. -->
-	 
-	
-		
-	
 
 
 </beans>
