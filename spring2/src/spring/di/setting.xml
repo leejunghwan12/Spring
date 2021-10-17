@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- 어노테이션이 있는지 확인하라는 명령어 추가 -->
-	<context:annotation-config />
+	<context:component-scan base-package="spring.di.ui,spring.di.entity"/>
 <!-- 	<bean id="exam1" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10" />
 	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="40" p:eng="50" />
  -->
@@ -61,9 +61,9 @@
 
 
 	<!--annotation을 이용한 객체생성방법 오토와이어드 하려면 찾아보라고 설계서에 써줘야 한다 -->
-	<bean id="console" class="spring.di.ui.InlineExamConsole">
-		<!-- <property name="exam" ref="exam" /> -->
-	</bean>
+	<!-- 	<bean id="console" class="spring.di.ui.InlineExamConsole">
+		<property name="exam" ref="exam" />
+	</bean> 10-17일 제거 --> 
 
 
 </beans>

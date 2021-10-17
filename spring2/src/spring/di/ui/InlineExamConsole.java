@@ -2,14 +2,16 @@ package spring.di.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import spring.di.entity.Exam;
 
+@Component
 public class InlineExamConsole implements ExamConsole {
 	//required = false 
 	//객체가 일단 없어도 OK 진행하여라  14강까지 내용 
-	@Autowired(required = false)
-	@Qualifier("exam2")
+	@Autowired
+//	@Qualifier("exam2")
 	private Exam exam;
 	//프라이빗인데 어떻게? 기본생성자가 생성되면서 된다.
 	public InlineExamConsole() {
