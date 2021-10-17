@@ -14,9 +14,7 @@
 	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="40" p:eng="50" />
  -->
 	<!-- Exam exam = new NewlecExam(); 세터로 만들기 -->
-	<!-- <bean id="exam" class="spring.di.entity.NewlecExam" > <property name="kor" 
-		value="30"></property> <property name="eng" value="40"></property> <property 
-		name="math" value="50"></property> </bean> -->
+	 <bean id="exam" class="spring.di.entity.NewlecExam" > </bean>
 	<!-- Exam exam = new NewlecExam(); 생성자로 만들기 -->
 
 	<!-- <bean id="exam" class="spring.di.entity.NewlecExam" > <constructor-arg 

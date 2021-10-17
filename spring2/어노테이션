@@ -31,6 +31,9 @@ xml <bean id= "b" class = "data B2" />
 그리고 <context:annotation-config/> 얘 없어도 된다. 자동으로 읽어 냄 
 
 
+17강 완강 // 어노테이션을 이용해서 인젝션 성공 ! 
+
+
 
 
  
